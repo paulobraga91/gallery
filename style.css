@@ -8,11 +8,12 @@
 
 :root{
     font-size: 62.5%;
-    --color-base-white:#ffffff;
-    --color-base-gray-100:#f5f5f5;
-    --color-base-gray-900:#202024;
-    --color-base-gray-300:#8d8d99;
-    --color-base-gray-500:#3d3d3d;
+    --hue: 300;
+    --color-base-white:hsl(0, 0%, 100%);
+    --color-base-gray-100:hsl(0, 0%, 96%);
+    --color-base-gray-300:hsl(var(--hue), 6%, 58%);
+    --color-base-gray-500:hsl(0, 0%, 24%);
+    --color-base-gray-900:hsl(var(--hue), 6%, 13%);
     font-family: 'Mulish', sans-serif;
 }
 
@@ -103,7 +104,9 @@ position: absolute;
 .item img{
     width: 100%;
     aspect-ratio: 16/9;
-        object-fit: cover;
+    object-fit: cover;
+    transition: all 400ms ease-out;/*caso queira configurar outra propriedade, é só adicionar o, e iniciar a partir do all*/
+
         
 }
 
@@ -111,8 +114,7 @@ position: absolute;
     filter: blur(1px);
     transform: scale(1.1);
     cursor: pointer;
-    transition-property: transform;
-    transition-duration: 1s;
+   
 }
 
 .item{
@@ -140,10 +142,38 @@ position: absolute;
     text-transform: uppercase;
 }
 
-.logo{
-    filter: brightness() ;
-}
 footer p{
     text-align: center;
     padding: 1.6rem;
+}
+
+header{
+    --startY:-100%;
+animation: move 2s;
+}
+
+footer{
+    --startY:100%;
+    animation: move 2s;
+}
+
+@keyframes move{
+ from{
+    transform:translateY(var(--startY));
+ }
+}
+
+.item{
+    --delay:.4s;
+    animation: appear .2s var(--delay) backwards;
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    50%{
+        transform: scale(1.2);
+    }
 }
